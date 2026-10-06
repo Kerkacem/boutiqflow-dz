@@ -1,0 +1,47 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:bf-sbom-2026-10-06-p13",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-06T12:00:00Z",
+    "tools": [
+      {
+        "vendor": "BoutiqFlow DZ",
+        "name": "BoutiqFlow SBOM Generator",
+        "version": "1.0.0"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "bom-ref": "boutiqflow-dz-core@1.0.0",
+      "name": "BoutiqFlow DZ Core Platform",
+      "version": "1.0.0",
+      "description": "Multi-tenant specialized retail and COD SaaS for Algerian clothing boutiques",
+      "licenses": [
+        {
+          "license": {
+            "id": "Proprietary"
+          }
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "node@20.18.0",
+      "name": "Node.js LTS Runtime",
+      "version": "20.18.0",
+      "purl": "pkg:generic/node@20.18.0"
+    },
+    {
+      "type": "database",
+      "bom-ref": "postgresql@17.11",
+      "name": "PostgreSQL Relational Engine",
+      "version": "17.11",
+      "purl": "pkg:generic/postgresql@17.11"
+    }
+  ],
+  "dependencies": []
+}

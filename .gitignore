@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml.tmp
+
+# Environment variables & local secrets
+.env
+.env.local
+.env.production
+*.pem
+*.key
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+server.log
+
+# Testing & Coverage
+coverage/
+.nyc_output/
+
+# Operating System & IDE Files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build & Temporary files
+dist/
+build/
+tmp/
+*.zip
+*.tar.gz

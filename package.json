@@ -1,0 +1,25 @@
+{
+  "name": "mahal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Multi-tenant SaaS for clothing retailers in Algeria (Boutique POS + Online COD)",
+  "scripts": {
+    "lint": "node scripts/lint.js",
+    "typecheck": "node scripts/typecheck.js",
+    "test": "node --test tests/**/*.test.js",
+    "test:isolation": "node --test tests/tenant_isolation.test.js",
+    "verify": "bash scripts/verify.sh",
+    "db:migrate": "node scripts/migrate.js",
+    "security:scan": "bash scripts/security-scan.sh"
+  },
+  "keywords": [
+    "pos",
+    "algeria",
+    "retail",
+    "cod",
+    "apparel",
+    "saas"
+  ],
+  "author": "Belkacem & MAHAL Core Team",
+  "license": "UNLICENSED"
+}

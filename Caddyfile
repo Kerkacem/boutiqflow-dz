@@ -1,0 +1,22 @@
+# Caddy Web Server Configuration for MAHAL Production
+# Automated SSL / TLS via Let's Encrypt with OWASP ASVS Security Headers
+
+{
+    email admin@mahal.dz
+}
+
+{$APP_DOMAIN:app.mahal.dz} {
+    reverse_proxy app:3000
+
+    header {
+        # OWASP ASVS Security Headers
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "camera=(), microphone=(), geolocation=()"
+        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.yalidine.app https://pay.chargily.net; frame-ancestors 'none';"
+    }
+
+    encode zstd gzip
+}

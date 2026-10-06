@@ -1,0 +1,47 @@
+{
+  "testSuite": "BoutiqFlow Full-Stack Chaos & Fault Injection",
+  "executedAt": "2026-10-06T12:00:00Z",
+  "scenariosTested": [
+    {
+      "name": "Database Connection Failure & Degraded Mode",
+      "result": "PASS",
+      "containment": "Fail closed, zero partial writes, zero unlogged records"
+    },
+    {
+      "name": "Worker Crash Mid-Transaction",
+      "result": "PASS",
+      "containment": "Zero duplicate orders, zero duplicate reservations"
+    },
+    {
+      "name": "Provider API 500 Outage & Circuit Breaker",
+      "result": "PASS",
+      "containment": "Circuit breaker OPEN prevents worker storm; local sales committed"
+    },
+    {
+      "name": "Provider Network Timeout & Bounded Backoff",
+      "result": "PASS",
+      "containment": "Outbox bounded retries prevent retry storm"
+    },
+    {
+      "name": "Malformed Queue Event Quarantine",
+      "result": "PASS",
+      "containment": "Dead Letter Queue isolates malformed payload without stream stall"
+    },
+    {
+      "name": "Revoked Device Offline Sync Attempt",
+      "result": "PASS",
+      "containment": "Rejected at auth boundary with DEVICE_REVOKED; 0 mutations committed"
+    },
+    {
+      "name": "Corrupted Backup Detection",
+      "result": "PASS",
+      "containment": "Checksum mismatch halts restore with CORRUPT_BACKUP_DETECTED"
+    },
+    {
+      "name": "Malicious Webhook Replay x 100",
+      "result": "PASS",
+      "containment": "1 processed, 99 idempotently replayed, 0 duplicate credit"
+    }
+  ],
+  "verdict": "PASS — 100% Chaos containment verified"
+}

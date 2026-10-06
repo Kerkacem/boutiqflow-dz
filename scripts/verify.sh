@@ -1,0 +1,173 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "=========================================================="
+echo "       BOUTIQFLOW DZ VERIFICATION SUITE — P0 to P14 GATES "
+echo "=========================================================="
+
+echo "Step 1: Running Linter..."
+node scripts/lint.js
+
+echo "Step 2: Checking Types & Contracts..."
+node scripts/typecheck.js
+
+echo "Step 3: Running Security, Secret Scan & Privacy CI Gate..."
+bash scripts/security-scan.sh
+node scripts/privacy_ci_gate.js
+
+echo "Step 4: Running Complete Test Suite across all Phases..."
+node --test \
+  tests/invariants.test.js \
+  tests/tenant_isolation.test.js \
+  tests/with_tenant.test.js \
+  tests/rbac_matrix.test.js \
+  tests/auth_security.test.js \
+  tests/audit_log.test.js \
+  tests/phase01_security_hostile.test.js \
+  tests/phase02_no_inventory_side_effect.test.js \
+  tests/phase02_catalog_invariants.test.js \
+  tests/phase03_inventory_hostile.test.js \
+  tests/phase03_inventory_concurrency.test.js \
+  tests/phase03_inventory_idempotency.test.js \
+  tests/phase03_inventory_boundary.test.js \
+  tests/phase04_pos_hostile.test.js \
+  tests/phase04_cash_register.test.js \
+  tests/phase04_payment_integrity.test.js \
+  tests/phase04_refund.test.js \
+  tests/phase04_idempotency.test.js \
+  tests/phase04_receipt.test.js \
+  tests/phase04_distributed_concurrency.test.js \
+  tests/phase05_purchase_hostile.test.js \
+  tests/phase05_costing.test.js \
+  tests/phase05_supplier_payables.test.js \
+  tests/phase05_expenses.test.js \
+  tests/phase05_profit_integrity.test.js \
+  tests/phase05_financial_idempotency.test.js \
+  tests/phase06_order_lifecycle.test.js \
+  tests/phase06_cod_hostile.test.js \
+  tests/phase06_confirmation_idempotency.test.js \
+  tests/phase06_reservation_integrity.test.js \
+  tests/phase06_pii_access.test.js \
+  tests/phase06_tenant_isolation.test.js \
+  tests/phase07_shipment_hostile.test.js \
+  tests/phase07_provider_contract.test.js \
+  tests/phase07_webhook_idempotency.test.js \
+  tests/phase07_status_regression.test.js \
+  tests/phase07_retry.test.js \
+  tests/phase07_cod_reconciliation.test.js \
+  tests/phase07_privacy_transfer.test.js \
+  tests/phase07_inventory_boundary.test.js \
+  tests/phase08_offline_queue.test.js \
+  tests/phase08_restart_recovery.test.js \
+  tests/phase08_sync_idempotency.test.js \
+  tests/phase08_conflict_resolution.test.js \
+  tests/phase08_multi_tab.test.js \
+  tests/phase08_device_revocation.test.js \
+  tests/phase08_offline_receipt.test.js \
+  tests/phase08_stock_allowance.test.js \
+  tests/phase08_chaos.test.js \
+  tests/phase09_metrics_integrity.test.js \
+  tests/phase09_reporting_rebuild.test.js \
+  tests/phase09_reconciliation.test.js \
+  tests/phase09_tenant_isolation.test.js \
+  tests/phase09_rbac.test.js \
+  tests/phase09_timezone.test.js \
+  tests/phase09_export_security.test.js \
+  tests/phase09_pii_export.test.js \
+  tests/phase09_dashboard_performance.test.js \
+  tests/phase09_event_idempotency.test.js \
+  tests/phase10_shopify_auth.test.js \
+  tests/phase10_shopify_webhooks.test.js \
+  tests/phase10_woocommerce_auth.test.js \
+  tests/phase10_woocommerce_webhooks.test.js \
+  tests/phase10_public_api_security.test.js \
+  tests/phase10_idempotency.test.js \
+  tests/phase10_external_order_import.test.js \
+  tests/phase10_inventory_projection.test.js \
+  tests/phase10_integration_outbox.test.js \
+  tests/phase10_webhook_ssrf.test.js \
+  tests/phase10_privacy_transfer.test.js \
+  tests/phase10_provider_failure.test.js \
+  tests/phase11_processing_register.test.js \
+  tests/phase11_processing_journal.test.js \
+  tests/phase11_journal_integrity.test.js \
+  tests/phase11_privacy_requests.test.js \
+  tests/phase11_dpia.test.js \
+  tests/phase11_breach_workflow.test.js \
+  tests/phase11_breach_deadline.test.js \
+  tests/phase11_transfer_guard.test.js \
+  tests/phase11_retention.test.js \
+  tests/phase11_legal_hold.test.js \
+  tests/phase11_superadmin_privacy.test.js \
+  tests/phase11_dpa_subprocessor.test.js \
+  tests/phase11_pii_export.test.js \
+  tests/phase11_tenant_isolation.test.js \
+  tests/phase11_privacy_ci_gate.test.js \
+  tests/i18n.test.js \
+  tests/catalog_p2.test.js \
+  tests/inventory_p3.test.js \
+  tests/pos_p4.test.js \
+  tests/printer.test.js \
+  tests/orders_p5.test.js \
+  tests/cod_confirmation.test.js \
+  tests/finance_p6.test.js \
+  tests/saas_p7.test.js \
+  tests/security_attack_p8.test.js \
+  tests/connectors.test.js \
+      tests/compliance_privacy.test.js \
+  tests/phase12_plan_entitlement.test.js \
+  tests/phase12_trial_abuse.test.js \
+  tests/phase12_subscription_state.test.js \
+  tests/phase12_invoice_immutability.test.js \
+  tests/phase12_payment_idempotency.test.js \
+  tests/phase12_payment_webhook.test.js \
+  tests/phase12_billing_reconciliation.test.js \
+  tests/phase12_tenant_lifecycle.test.js \
+  tests/phase12_deletion_guard.test.js \
+  tests/phase12_usage_limits.test.js \
+  tests/phase12_entitlement_cache.test.js \
+  tests/phase12_abuse_rate_limits.test.js \
+  tests/phase12_admin_override.test.js \
+  tests/phase12_tenant_provisioning.test.js \
+  tests/phase13_dependency_security.test.js \
+  tests/phase13_secret_scan.test.js \
+  tests/phase13_auth_redteam.test.js \
+  tests/phase13_authorization_redteam.test.js \
+  tests/phase13_rls_revalidation.test.js \
+  tests/phase13_pool_isolation.test.js \
+  tests/phase13_injection.test.js \
+  tests/phase13_xss_csrf.test.js \
+  tests/phase13_ssrf.test.js \
+  tests/phase13_resource_exhaustion.test.js \
+  tests/phase13_worker_chaos.test.js \
+  tests/phase13_database_failure.test.js \
+  tests/phase13_event_corruption.test.js \
+  tests/phase13_inventory_integrity.test.js \
+  tests/phase13_financial_integrity.test.js \
+  tests/phase13_backup_restore.test.js \
+  tests/phase13_point_in_time_recovery.test.js \
+  tests/phase13_ransomware_recovery.test.js \
+  tests/phase13_reporting_reconciliation.test.js \
+  tests/phase13_offline_tamper.test.js \
+  tests/phase13_billing_fraud.test.js \
+  tests/phase13_webhook_redteam.test.js \
+  tests/phase13_load.test.js \
+  tests/phase13_monitoring_alerts.test.js \
+  tests/phase13_full_system_chaos.test.js \
+  tests/phase14_release_integrity.test.js \
+  tests/phase14_production_config.test.js \
+  tests/phase14_release_security.test.js \
+  tests/phase14_deployment_smoke.test.js \
+  tests/phase14_rollback.test.js \
+  tests/phase14_cache_isolation.test.js \
+  tests/phase14_async_tenant_isolation.test.js \
+  tests/phase14_migration.test.js \
+  tests/phase14_final_reconciliation.test.js \
+  tests/phase14_canary.test.js \
+  tests/phase14_privacy_signoff.test.js \
+  tests/phase14_billing_signoff.test.js
+
+echo "=========================================================="
+echo "   ALL PHASE GATES (P0 to P14) PASSED SUCCESSFULLY!       "
+echo "   PRODUCTION RELEASE CANDIDATE CERTIFIED: GO             "
+echo "=========================================================="

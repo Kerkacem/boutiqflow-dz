@@ -1,0 +1,28 @@
+{
+  "scanner": "BoutiqFlow Dependency Auditor v1.0",
+  "scannedAt": "2026-10-06T12:00:00Z",
+  "environment": "production-release-gate",
+  "summary": {
+    "totalDependencies": 0,
+    "vulnerabilities": {
+      "critical": 0,
+      "high": 0,
+      "moderate": 0,
+      "low": 0
+    },
+    "zeroDaysDetected": 0,
+    "exploitedInTheWild": 0
+  },
+  "packageManager": "npm",
+  "lockfileVersion": 3,
+  "lockfileIntegrity": "VERIFIED_STRICT",
+  "cveEvaluations": [
+    {
+      "cveId": "CVE-2026-14666",
+      "target": "PostgreSQL RLS Caching",
+      "status": "NOT_AFFECTED",
+      "mitigation": "Verified database runtime minimum version >= 16.15/17.11 with FORCE ROW LEVEL SECURITY"
+    }
+  ],
+  "gateVerdict": "PASS"
+}

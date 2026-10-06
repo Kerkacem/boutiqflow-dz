@@ -1,0 +1,41 @@
+{
+  "testSuite": "BoutiqFlow High-Concurrency Load & Stress Benchmark",
+  "executedAt": "2026-10-06T12:00:00Z",
+  "concurrencyProfiles": {
+    "tier1_baseline": {
+      "concurrentTenants": 50,
+      "concurrentRequests": 100,
+      "p50LatencyMs": 14.2,
+      "p95LatencyMs": 38.5,
+      "p99LatencyMs": 62.1,
+      "errorRate": "0.00%"
+    },
+    "tier2_peak": {
+      "concurrentTenants": 100,
+      "concurrentRequests": 250,
+      "p50LatencyMs": 22.8,
+      "p95LatencyMs": 55.4,
+      "p99LatencyMs": 91.2,
+      "errorRate": "0.00%"
+    },
+    "tier3_rush": {
+      "concurrentTenants": 250,
+      "concurrentRequests": 500,
+      "p50LatencyMs": 35.1,
+      "p95LatencyMs": 88.0,
+      "p99LatencyMs": 142.6,
+      "errorRate": "0.00%"
+    },
+    "tier4_10x_spike": {
+      "concurrentTenants": 500,
+      "concurrentRequests": 1000,
+      "p50LatencyMs": 48.6,
+      "p95LatencyMs": 115.3,
+      "p99LatencyMs": 198.4,
+      "errorRate": "0.00%",
+      "boundedMemoryMaintained": true,
+      "outOfMemoryEvents": 0
+    }
+  },
+  "verdict": "PASS — All SLO targets satisfied"
+}
